@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Street Food Supply System</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --secondary-color: #ecf0f1;
+      --accent-color: #3498db;
+      --highlight: #1abc9c;
+    }
+    * {
+      box-sizing: border-box;
+      transition: all 0.3s ease;
+    }
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--secondary-color);
+      color: var(--primary-color);
+    }
+    header {
+      background: linear-gradient(to right, var(--primary-color), var(--highlight));
+      color: white;
+      padding: 2rem 1.5rem 1rem;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+    header p {
+      margin-top: 0.5rem;
+      font-size: 1.2rem;
+      font-style: italic;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background: var(--accent-color);
+      padding: 1rem;
+      flex-wrap: wrap;
+    }
+    nav a {
+      text-decoration: none;
+      padding: 0.8rem 1.2rem;
+      border: none;
+      background: white;
+      color: var(--primary-color);
+      font-weight: bold;
+      margin: 0.5rem;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    .highlight-section {
+      background: white;
+      padding: 2rem;
+      text-align: center;
+    }
+    .highlight-section h2 {
+      color: var(--primary-color);
+      margin-bottom: 1rem;
+    }
+    .trusted-message {
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 1rem auto;
+    }
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+      }
+      nav a {
+        margin: 0.5rem 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Street Food Supply Management</h1>
+    <p>Connecting trusted local suppliers with passionate customers – fast, safe, and reliable!</p>
+  </header>
+
+  <nav>
+    <a href="admin.html">Admin</a>
+    <a href="customer.html">Customer</a>
+    <a href="supplier.html">Supplier</a>
+  </nav>
+
+  <section class="highlight-section">
+    <h2>Trusted Local Suppliers</h2>
+    <p class="trusted-message">
+      Our platform is powered by verified <strong>local raw material suppliers</strong> who ensure quality and timely delivery. From fresh produce to spices, our suppliers support hundreds of street food vendors across the city.
+    </p>
+  </section>
+
+  <section class="highlight-section" style="background: var(--accent-color); color: white;">
+    <h2>Why Choose Us?</h2>
+    <ul style="list-style: none; padding: 0; font-size: 1.1rem;">
+      <li>✅ Real-time order management</li>
+      <li>✅ Trusted supplier network</li>
+      <li>✅ Easy-to-use interface for customers & suppliers</li>
+      <li>✅ Responsive design for all screen sizes</li>
+    </ul>
+  </section>
+</body>
+</html>

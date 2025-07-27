@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Supplier Dashboard</title>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #ecf0f1;
+      margin: 0;
+      padding: 0;
+      color: #2c3e50;
+    }
+    header {
+      background: linear-gradient(to right, #2c3e50, #1abc9c);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .back-btn {
+      background: white;
+      color: #2c3e50;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .container {
+      padding: 2rem;
+    }
+    select, button {
+      padding: 0.6rem;
+      font-size: 1rem;
+      margin: 0.5rem 0;
+    }
+    .card {
+      background: white;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h2>Supplier Dashboard</h2>
+    <a class="back-btn" href="index.html">⬅ Back to Dashboard</a>
+  </header>
+
+  <div class="container">
+    <h3>Select Your Supplier Name</h3>
+    <select id="supplierSelect">
+      <option value="">-- Select Supplier --</option>
+    </select>
+    <button onclick="filterCustomers()">View Orders</button>
+
+    <div id="resultArea"></div>
+  </div>
+
+  <script>
+    let allCustomers = [];
+    let allSuppliers = [];
+
+    // Load suppliers
+    fetch('http://localhost:8080/api/suppliers/allSupliers')
+      .then(res => res.json())
+      .then(data => {
+        allSuppliers = data;
+        const select = document.getElementById("supplierSelect");
+        data.forEach(supplier => {
+          select.innerHTML += `<option value="${supplier.id}">${supplier.name} - ${supplier.location}</option>`;
+        });
+      });
+
+    // Load all customers in advance
+    fetch('http://localhost:8080/api/customer/allCustomer')
+      .then(res => res.json())
+      .then(data => {
+        allCustomers = data;
+      });
+
+    function filterCustomers() {
+      const selectedSupplierId = document.getElementById("supplierSelect").value;
+      const result = document.getElementById("resultArea");
+      result.innerHTML = "";
+
+      if (!selectedSupplierId) {
+        result.innerHTML = "<p>Please select a supplier first.</p>";
+        return;
+      }
+
+      const filtered = allCustomers.filter(c => c.supplier && c.supplier.id == selectedSupplierId);
+
+      if (filtered.length === 0) {
+        result.innerHTML = "<p>No customers have ordered from you yet.</p>";
+        return;
+      }
+
+      result.innerHTML = `<h3>Customers Who Ordered from You:</h3>`;
+      filtered.forEach(customer => {
+        result.innerHTML += `
+          <div class="card">
+            <strong>Name:</strong> ${customer.name}<br/>
+            <strong>Contact:</strong> ${customer.contact}<br/>
+            <strong>Location:</strong> ${customer.location}<br/>
+            <strong>Order Details:</strong> ${customer.orderDetails}
+          </div>
+        `;
+      });
+    }
+  </script>
+</body>
+</html>
